@@ -41,4 +41,12 @@ export class CategoriaService {
       throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
     return nomeProduto;
   }
+
+  async findByNomeCategoria(nomeCategoria: string): Promise<Categoria[]> {
+    return await this.categoriaRepository.find({
+      where: {
+        nomeCategoria: ILike(`%${nomeCategoria}%`),
+      },
+    });
+  }
 }
