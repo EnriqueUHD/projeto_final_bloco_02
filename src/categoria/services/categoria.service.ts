@@ -43,11 +43,19 @@ export class CategoriaService {
   }
 
   async findByNomeCategoria(nomeCategoria: string): Promise<Categoria[]> {
-    return await this.categoriaRepository.find({
+    const nome = await this.categoriaRepository.find({
       where: {
         nomeCategoria: ILike(`%${nomeCategoria}%`),
       },
     });
+
+    if (nome.length === 0)
+      throw new HttpException(
+        'Categoria não encontrada!',
+        HttpStatus.NOT_FOUND,
+      );
+
+    return nome;
   }
 
   async findByPrecoOrdenado(ordem: 'ASC' | 'DESC'): Promise<Categoria[]> {
