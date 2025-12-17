@@ -1,10 +1,12 @@
 import {
+  Body,
   Controller,
   Get,
   HttpCode,
   HttpStatus,
   Param,
   ParseIntPipe,
+  Post,
   Query,
 } from '@nestjs/common';
 import { CategoriaService } from '../services/categoria.service';
@@ -46,5 +48,11 @@ export class CategoriaController {
     @Query('ordem') ordem: 'ASC' | 'DESC' = 'ASC',
   ): Promise<Categoria[]> {
     return this.categoriaService.findByPrecoOrdenado(ordem);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.OK)
+  create(@Body() categoria: Categoria): Promise<Categoria>{
+    return this.categoriaService.create(categoria);
   }
 }
