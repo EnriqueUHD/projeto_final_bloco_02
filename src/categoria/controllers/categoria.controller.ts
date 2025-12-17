@@ -44,12 +44,12 @@ export class CategoriaController {
   }
 
   @Get('/preco/crescente')
-  findByPrecoAsc() {
+  findByPrecoCrescente() {
     return this.categoriaService.findByPrecoOrdenado('ASC');
   }
 
   @Get('/preco/decrescente')
-  findByPrecoDesc() {
+  findByPrecoDecrescente() {
     return this.categoriaService.findByPrecoOrdenado('DESC');
   }
 
