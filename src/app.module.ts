@@ -14,7 +14,7 @@ import { Categoria } from './categoria/entities/categoria.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        const conecao = await mysql.createConnection({
+        const conexao = await mysql.createConnection({
           host: configService.get<string>('DB_HOST'),
           port: Number(configService.get<string>('DB_PORT')),
           user: configService.get<string>('DB_USERNAME'),
@@ -22,9 +22,9 @@ import { Categoria } from './categoria/entities/categoria.entity';
         });
 
         const dbName = configService.get<string>('DB_NAME');
-        await conecao.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
+        await conexao.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
 
-        await conecao.end();
+        await conexao.end();
 
         return {
           type: configService.get<string>('DB_TYPE') as 'mysql',
