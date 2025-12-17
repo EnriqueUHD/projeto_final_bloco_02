@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Categoria } from '../entities/categoria.entity';
-import { ILike, Repository } from 'typeorm';
+import { DeleteResult, ILike, Repository } from 'typeorm';
 
 @Injectable()
 export class CategoriaService {
@@ -73,5 +73,11 @@ export class CategoriaService {
     await this.findById(categoria.id);
 
     return await this.categoriaRepository.save(categoria);
+  }
+
+  async delete(id: number): Promise<DeleteResult> {
+    await this.findById(id);
+
+    return await this.categoriaRepository.delete(id);
   }
 }
