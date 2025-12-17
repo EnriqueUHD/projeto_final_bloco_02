@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { CategoriaService } from '../services/categoria.service';
 import { Categoria } from '../entities/categoria.entity';
@@ -37,5 +38,13 @@ export class CategoriaController {
     @Param('nomeCategoria') nomeCategoria: string,
   ): Promise<Categoria[]> {
     return this.categoriaService.findByNomeCategoria(nomeCategoria);
+  }
+
+  @Get('/preco')
+  @HttpCode(HttpStatus.OK)
+  findByPrecoOrdenado(
+    @Query('ordem') ordem: 'ASC' | 'DESC' = 'ASC',
+  ): Promise<Categoria[]> {
+    return this.categoriaService.findByPrecoOrdenado(ordem);
   }
 }

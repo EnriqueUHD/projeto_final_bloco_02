@@ -49,4 +49,19 @@ export class CategoriaService {
       },
     });
   }
+
+  async findByPrecoOrdenado(ordem: 'ASC' | 'DESC'): Promise<Categoria[]> {
+    const produtos = await this.categoriaRepository.find({
+      order: {
+        preco: ordem,
+      },
+    });
+
+    if (produtos.length === 0)
+      throw new HttpException(
+        'Nenhum produto encontrado!',
+        HttpStatus.NOT_FOUND,
+      );
+    return produtos;
+  }
 }
