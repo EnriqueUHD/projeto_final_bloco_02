@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as mysql from 'mysql2/promise';
 import { Categoria } from './categoria/entities/categoria.entity';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -40,5 +41,6 @@ import { Categoria } from './categoria/entities/categoria.entity';
     }),
     CategoriaModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
