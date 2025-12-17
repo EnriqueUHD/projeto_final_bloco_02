@@ -36,7 +36,7 @@ export class CategoriaController {
     return this.categoriaService.findByProduto(produto);
   }
 
-  @Get('/categoria/:nomeCategoria')
+  @Get('/nome/:nomeCategoria')
   @HttpCode(HttpStatus.OK)
   findByNomeCategoria(
     @Param('nomeCategoria') nomeCategoria: string,
@@ -53,7 +53,7 @@ export class CategoriaController {
   }
 
   @Post()
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.CREATED)
   create(@Body() categoria: Categoria): Promise<Categoria> {
     return this.categoriaService.create(categoria);
   }
