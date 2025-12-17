@@ -5,6 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'tb_categorias' })
 export class Categoria {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @IsNotEmpty()
