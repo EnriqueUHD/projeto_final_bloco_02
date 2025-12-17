@@ -7,6 +7,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
 import { CategoriaService } from '../services/categoria.service';
@@ -52,7 +53,13 @@ export class CategoriaController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
-  create(@Body() categoria: Categoria): Promise<Categoria>{
+  create(@Body() categoria: Categoria): Promise<Categoria> {
     return this.categoriaService.create(categoria);
+  }
+
+  @Put()
+  @HttpCode(HttpStatus.OK)
+  update(@Body() categoria: Categoria): Promise<Categoria> {
+    return this.categoriaService.update(categoria);
   }
 }
