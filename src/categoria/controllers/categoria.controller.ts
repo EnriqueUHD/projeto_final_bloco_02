@@ -9,7 +9,6 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { CategoriaService } from '../services/categoria.service';
 import { Categoria } from '../entities/categoria.entity';
@@ -44,12 +43,14 @@ export class CategoriaController {
     return this.categoriaService.findByNomeCategoria(nomeCategoria);
   }
 
-  @Get('/preco')
-  @HttpCode(HttpStatus.OK)
-  findByPrecoOrdenado(
-    @Query('ordem') ordem: 'ASC' | 'DESC' = 'ASC',
-  ): Promise<Categoria[]> {
-    return this.categoriaService.findByPrecoOrdenado(ordem);
+  @Get('/preco/crescente')
+  findByPrecoAsc() {
+    return this.categoriaService.findByPrecoOrdenado('ASC');
+  }
+
+  @Get('/preco/decrescente')
+  findByPrecoDesc() {
+    return this.categoriaService.findByPrecoOrdenado('DESC');
   }
 
   @Post()

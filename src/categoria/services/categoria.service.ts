@@ -59,18 +59,18 @@ export class CategoriaService {
   }
 
   async findByPrecoOrdenado(ordem: 'ASC' | 'DESC'): Promise<Categoria[]> {
-    const produtos = await this.categoriaRepository.find({
-      order: {
-        preco: ordem,
-      },
+    const precosOrdem = await this.categoriaRepository.find({
+      order: { preco: ordem },
     });
 
-    if (produtos.length === 0)
+    if (!precosOrdem || precosOrdem.length === 0) {
       throw new HttpException(
         'Nenhum produto encontrado!',
         HttpStatus.NOT_FOUND,
       );
-    return produtos;
+    }
+
+    return precosOrdem;
   }
 
   async create(categoria: Categoria): Promise<Categoria> {
